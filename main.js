@@ -49,6 +49,36 @@ app.post("/send-message", (req, res) => {
   }
 });
 
+app.post("/number", (req, res) => {
+  const { number, message } = req.body; // Extract the number and message from the request body
+  if (number && message) {
+    const formattedNumber = number + "@c.us"; // Format the number for WhatsApp
+    client
+      .sendMessage(formattedNumber, message)
+      .then((response) => {
+        res
+          .status(200)
+          .send({
+            success: true,
+            message: "Message sent successfully",
+            response,
+          });
+      })
+      .catch((error) => {
+        res
+          .status(500)
+          .send({ success: false, message: "Failed to send message", error });
+      });
+  } else {
+    res
+      .status(400)
+      .send({
+        success: false,
+        message: "Phone number or message not provided",
+      });
+  }
+});
+
 app.listen(3030, () => {
   console.log("Server running on port 3030");
 });
