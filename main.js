@@ -18,7 +18,7 @@ client.on("ready", () => {
   console.log("Client is ready!");
 });
 
-const phoneNumber = "Customize your phone number here";
+const phoneNumber = "60108759947@c.us";
 
 client.on("message", (message) => {
   client.sendMessage(phoneNumber, `Your number is ${message.from}`);
